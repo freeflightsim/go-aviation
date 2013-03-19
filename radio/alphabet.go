@@ -11,10 +11,11 @@ import (
 	"sort"
 	"encoding/json"
 )
+
+
 //================================================
 // Definition
 //================================================
-
 type Alpha struct{
 	Char string `json:"char"`
 	Word string `json:"word"`
@@ -24,8 +25,26 @@ type Alpha struct{
 
 //= Create the map
 // BUG(perdo) - this needs to be icao
+
+//= maybe this could be in and the byte no of "character" is index == restricted ;-)
 var AlphabetICAO = map[string]*Alpha {
 
+	"-": {"-", "dash", "?", ""},
+	".": {".", "dot", "DOT", ""},
+	
+	
+	"0": {"0", "zero", "ZEE-RO", ""},
+	"1": {"1", "one", "WUN", ""},
+	"2": {"2", "two", "TOO", ""},
+	"3": {"3", "three", "TREE", ""},
+	"4": {"4", "four", "FOW-ER", ""},
+	"5": {"5", "five", "FIFE", ""},
+	"6": {"6", "six", "SIX", ""},
+	"7": {"7", "seven", "SEV-EN", ""},
+	"8": {"8", "eight", "AIT", ""},
+	"9": {"9", "niner", "NIN-ER", ""},
+	
+	
 	"A": {"A", "alfa", "AL-FA", ".-"},
 	"B": {"B", "bravo", "BRAH-VOH", "-..."},
 	"C": {"C", "charlie", "SHAR-LEE", "-.-."},
@@ -56,20 +75,6 @@ var AlphabetICAO = map[string]*Alpha {
 	"X": {"X", "xray", "", ""},
 	"Y": {"Y", "yankee", "", ""},
 	"Z": {"Z", "zulu", "", ""},
-	
-	"0": {"0", "zero", "ZEE-RO", ""},
-	"1": {"1", "one", "WUN", ""},
-	"2": {"2", "two", "TOO", ""},
-	"3": {"3", "three", "TREE", ""},
-	"4": {"4", "four", "FOW-ER", ""},
-	"5": {"5", "five", "FIFE", ""},
-	"6": {"6", "six", "SIX", ""},
-	"7": {"7", "seven", "SEV-EN", ""},
-	"8": {"8", "eight", "AIT", ""},
-	"9": {"9", "niner", "NIN-ER", ""},
-	
-	"-": {"-", "dash", "?", ""},
-	".": {".", "dot", "DOT", ""},
 }
 
 
@@ -110,12 +115,17 @@ func GetAjaxAlphabet() string{
 //= Will return the words from a callsing eg BA19 returns "bravo alfa zero niner"
 func Callsign2Words  (callsign string) string {
 	
-	//= TODO	
-	test := "unix39"
+
 	// need to split up words
-	for idx, c := range test{
-		fmt.Println("c=", idx, c)
+	for idx, c := range callsign{
+		ss := string(c)
+		alpha, err := AlphabetICAO[ss]
+		if err  {
+			fmt.Println("NOT FOUND", alpha,ss)
+		}else{
+			fmt.Println("c=", idx, string(c), alpha)
+		}
 	}	
 		
-	return "todo"
+	return callsign
 }
