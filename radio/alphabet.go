@@ -83,7 +83,7 @@ type AjaxRadioAlphabetPayload struct{
 }
 
 //= Spool out the ajax
-// ? help ? theres gott be a way to make a "constant" variable global
+// ? help ? theres got be a way to make a "constant" variable global This feels wrong !!
 //           in this mod? there must be a better way.. AND sorted keys BTW
 func GetAjaxAlphabet() string{
 	payload := new(AjaxRadioAlphabetPayload)
@@ -106,6 +106,7 @@ func GetAjaxAlphabet() string{
     return string(s)
 }
 
+
 //= Will return the words from a callsing eg BA19 returns "bravo alfa zero niner"
 func Callsign2Words  (callsign string) string {
 	
@@ -117,5 +118,4 @@ func Callsign2Words  (callsign string) string {
 	}	
 		
 	return "todo"
-
 }
